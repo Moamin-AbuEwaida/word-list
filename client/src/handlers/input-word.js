@@ -23,7 +23,6 @@ export const inputWord = (event) => {
   const action = event.target.value;
 
   /* -- use the input and data to implement the user story --
-
     a user can add a new word to the list
       given the input contains non-letters,
         it will not be added
@@ -43,9 +42,19 @@ export const inputWord = (event) => {
   warnings.innerText = '';
 
   if (action === 'add') {
-    // ... write some code ...
-  } else if (action === 'remove') {
-    // ... write some code ...
+    if (isWord(text) === false) {
+      warnings.className = 'warning';
+      warnings.innerHTML = `"${text}" is not a word`;
+    } else {
+      data.words.push(text);
+    }
+  }
+  if (action === 'remove') {
+    if (data.words.includes(text) === false) {
+      warnings.innerHTML = `${text} is not in the list`;
+    } else {
+      data.words.splice(data.words.indexOf(text), 1);
+    }
   }
 
   /* -- render new words -- */
